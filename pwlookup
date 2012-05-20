@@ -1,0 +1,45 @@
+#!/bin/bash
+
+########################################################################
+# This script mounts an encrypted Volume and greps a given search tearm
+# Platforam: MacOS, tested on 10.6, 10.7
+#
+# usage sample: 	pwlookup <search term>
+# insert new pwd: pwlookup -insert -> opens vi
+#
+# Written by Tobias Buchmann 2010
+# Updated Mai 2012
+########################################################################
+
+# Adapt script settings by changing pwlookup.conf
+# If it does not exist yet, create one from pwlookup.conf.example
+source pwlookup.conf
+
+if [ "$1" = "-insert" ]
+then
+	echo "insert mode selected"
+	hdiutil attach -quiet -stdinpass $image_path
+	vi $mount_path$file_name
+
+elif [ -n "$1" ]
+then
+	hdiutil attach -quiet -stdinpass $image_path
+	grep -i $1 $mount_path$file_name
+	grep_result_status=$?
+	
+	# let me know when result was empty
+	if test $grep_result_status -gt 0 
+	then
+			echo "Result empty."
+	fi
+
+else
+	echo "No search term was given."
+	exit 1
+fi
+
+# when done, hit return and eject volume
+read
+hdiutil detach $mount_path
+# kill parent process. in this case the current window
+kill -9 $PPID
