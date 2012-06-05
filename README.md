@@ -15,7 +15,7 @@ There are tons of password managers out there. And they are probably more capabl
 This script assumes that you have an encryped disk image on your machine that contains a plain text file with your passwords. One password per line.
 
 1. Copy the file pwlookup to some place within your PATH.
-2. Copy the file pwlookup.conf.example into the same directory
+2. Copy the file example/pwlookup.conf.example into the same directory as pwlookup
 	* Rename it to "pwlookup.conf"
 	* Modify it so it matches your system setup
 

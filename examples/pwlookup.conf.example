@@ -2,8 +2,10 @@
 
 # Path to the encrypted disk image
 image_path="/absolute/path/to/image.sparseimage"
+
 # Mountpoint for the image 
 # example "/Volues/passwords"
 mount_path="/absolute/mount/path/with/trailing/slash/"
+
 # Name of the password file
 file_name="pwd.txt"
